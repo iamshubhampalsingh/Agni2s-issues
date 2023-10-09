@@ -1,0 +1,34 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+from PIL import Image
+import io
+# Connect to the devices
+receiver_device_serial = "192.168.2.50:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+time.sleep(2)
+#Issue description:
+#1check whether decline button is coming in red or green(high priority issue)
+# Locate the "DECLINE" button using its resourceId and text attributes
+decline_button = receiver_device(resourceId="android:id/action0", text="DECLINE")
+
+# Capture a screenshot
+screenshot_bytes = receiver_device.screenshot(format="raw")
+
+# Convert the screenshot bytes to a Pillow Image object
+image = Image.open(io.BytesIO(screenshot_bytes))
+
+# Define the coordinates of the "DECLINE" button
+button_x, button_y = decline_button.center()
+
+# Get the color of the pixel at the button's coordinates
+button_color = image.getpixel((button_x, button_y))
+
+# Define the expected red color in RGB format
+expected_red_color = (255, 0, 0)
+
+# Compare the button's color to the expected red color
+if button_color == expected_red_color:
+    print("The DECLINE button is red.")
+else:
+    print("The DECLINE button is not red.")
