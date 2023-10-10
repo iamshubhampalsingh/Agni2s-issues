@@ -1,0 +1,15 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+from PIL import Image
+import io
+# Connect to the devices
+receiver_device_serial = "192.168.2.50:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+time.sleep(2)
+receiver_device.xpath('//*[@resource-id="com.android.launcher3:id/hotseat"]/android.view.ViewGroup[1]/android.widget.TextView[1]').click()
+time.sleep(2)
+receiver_device(resourceId="com.google.android.dialer:id/set_default_phone_app_button").click()
+time.sleep(2)
+if receiver_device(resourceId="com.google.android.dialer:id/set_default_phone_app_button").exists():
+    print("The device is stuck at phone interface")
