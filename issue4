@@ -1,0 +1,27 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+from PIL import Image
+import io
+# Connect to the devices
+receiver_device_serial = "192.168.2.50:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+time.sleep(2)
+receiver_device.xpath('//*[@resource-id="com.android.launcher3:id/workspace"]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[1]').click()
+time.sleep(2)
+receiver_device(resourceId="com.android.dialer:id/main_options_menu_button").click()
+time.sleep(2)
+receiver_device.xpath('//android.widget.ListView/android.widget.LinearLayout[2]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]').click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Calling accounts").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="IND airtel").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Call forwarding").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Voice call forwarding").click()
+time.sleep(10)
+if receiver_device(description="5G").exists():
+    print("The device is latched to 5G ")
+else:
+    print("The device is latched to 4G")
