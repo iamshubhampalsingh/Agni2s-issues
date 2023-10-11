@@ -1,0 +1,15 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+from PIL import Image
+import io
+# Connect to the devices
+receiver_device_serial = "192.168.2.50:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+time.sleep(2)
+#Issue description:
+#5G Vowifi (high priority issue)
+import subprocess
+
+ if receiver_device(resourceId="com.android.dialer:id/incall_end_call").exists():
+        print("The red icon on interface with wifi present")
