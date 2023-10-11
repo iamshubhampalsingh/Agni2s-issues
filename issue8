@@ -1,0 +1,25 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+from PIL import Image
+import io
+# Connect to the devices
+receiver_device_serial = "192.168.2.50:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+time.sleep(2)
+#Issue description:
+#5G Automatic call recording option working or not working (high priority issue)
+receiver_device.xpath('//*[@resource-id="com.android.launcher3:id/workspace"]/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.TextView[1]').click()
+time.sleep(2)
+receiver_device(resourceId="com.android.dialer:id/main_options_menu_button").click()
+time.sleep(2)
+receiver_device.xpath('//android.widget.ListView/android.widget.LinearLayout[2]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]').click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Automatic call recording").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/switch_widget").click()
+time.sleep(2)
+if receiver_device(resourceId="android:id/content").exists():
+    print("Call recording option names do not come ")
+else:
+    print("call recording option is coming")
